@@ -1,0 +1,13 @@
+name: curl_test
+version: 0.1.0
+
+authors:
+  - Afront <3943720+Afront@users.noreply.github.com>
+
+targets:
+  curl_test:
+    main: src/curl_test.cr
+
+crystal: 0.34.0
+
+license: MIT
