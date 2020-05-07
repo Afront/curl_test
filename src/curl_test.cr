@@ -15,10 +15,10 @@ module CurlTest
   # puts ARGV
   # host, count, size, port = ARGV
 
-  def self.run_curl(mode : String, url : String)
+  def self.run_curl(name : String, url : String, mode = name)
     100.times do |i|
       spawn do
-        command = %Q{ curl --data "#{DATA_URL}" --#{mode.strip} #{url.strip}/post -w "%{time_connect},%{time_total},%{speed_download},%{http_code},%{size_download}\n" -o /dev/null -s >> #{mode.strip}.csv | bash}
+        command = %Q{ curl --data "#{DATA_URL}" --#{mode.strip} #{url.strip}/post -w "%{time_connect},%{time_total},%{speed_download},%{http_code},%{size_download}\n" -o /dev/null -s >> #{name.strip}.csv | bash}
         args = ["-c"]
 
         Process.run("sh", args << command)
@@ -32,11 +32,11 @@ module CurlTest
   end
 
   run_curl("http3", "https://quic.aiortc.org/httpbin")
-  run_curl("http2-prior-knowledge-aiortc", "https://quic.aiortc.org/httpbin")
-  run_curl("http2-aiortc", "https://quic.aiortc.org/httpbin")
-  run_curl("http1.1-aiortc", "https://quic.aiortc.org/httpbin")
-  run_curl("http1.0-aiortc", "https://quic.aiortc.org/httpbin")
-  run_curl("http0.9-aiortc", "https://quic.aiortc.org/httpbin")
+  run_curl("http2-prior-knowledge-aiortc", "https://quic.aiortc.org/httpbin", "http2-prior-knowledge")
+  run_curl("http2-aiortc", "https://quic.aiortc.org/httpbin", "http2")
+  run_curl("http1.1-aiortc", "https://quic.aiortc.org/httpbin", "http1.1")
+  run_curl("http1.0-aiortc", "https://quic.aiortc.org/httpbin", "http1.0")
+  run_curl("http0.9-aiortc", "https://quic.aiortc.org/httpbin", "http0.9")
 
   run_curl("http2-prior-knowledge", "https://httpbin.org")
   run_curl("http2", "https://httpbin.org")
