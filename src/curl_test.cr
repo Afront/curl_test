@@ -32,6 +32,12 @@ module CurlTest
   end
 
   run_curl("http3", "https://quic.aiortc.org/httpbin")
+  run_curl("http2-prior-knowledge-aiortc", "https://quic.aiortc.org/httpbin")
+  run_curl("http2-aiortc", "https://quic.aiortc.org/httpbin")
+  run_curl("http1.1-aiortc", "https://quic.aiortc.org/httpbin")
+  run_curl("http1.0-aiortc", "https://quic.aiortc.org/httpbin")
+  run_curl("http0.9-aiortc", "https://quic.aiortc.org/httpbin")
+
   run_curl("http2-prior-knowledge", "https://httpbin.org")
   run_curl("http2", "https://httpbin.org")
   run_curl("http1.1", "https://httpbin.org")
